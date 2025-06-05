@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Продукция Atomy - Корейская косметика премиум-класса</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        ul {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+        }
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #3b7dd8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #2a6bc7;
+        }
+        /* Шапка */
+        .main-header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .logo-icon {
+            color: #3b7dd8;
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        .main-nav ul {
+            display: flex;
+        }
+        .main-nav li {
+            margin-left: 30px;
+        }
+        .main-nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .main-nav a:hover, .main-nav .active a {
+            color: #3b7dd8;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        /* Корзина и иконки */
+        .cart-icon {
+            position: relative;
+            margin-left: 20px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        /* Карточка корзины */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .cart-sidebar.active {
+            right: 0;
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        .cart-item-price {
+            color: #3b7dd8;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        .cart-item-remove {
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .cart-total {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: right;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #3b7dd8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .checkout-btn:hover {
+            background-color: #2a6bc7;
+        }
+        /* Оверлей корзины */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        .cart-overlay.active {
+            display: block;
+        }
+        /* Модальное окно товара */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-modal:hover {
+            color: #333;
+        }
+        /* Детали товара в модалке */
+        .modal-product {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .modal-product-image {
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            border-radius: 8px;
+        }
+        .modal-product-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #3b7dd8;
+        }
+        .modal-product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b7dd8;
+            margin: 20px 0;
+        }
+        .modal-product-price .old-price {
+            text-decoration: line-through;
+            font-size: 1.2rem;
+            color: #656d78;
+            margin-right: 10px;
+        }
+        .modal-product-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .modal-product-features {
+            margin-bottom: 25px;
+        }
+        .modal-product-features li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        .modal-product-features li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #3b7dd8;
+        }
+        .modal-product-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-add-to-cart {
+            background-color: #3b7dd8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .btn-add-to-cart:hover {
+            background-color: #2a6bc7;
+        }
+        .btn-wishlist {
+            background-color: transparent;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-wishlist:hover {
+            border-color: #3b7dd8;
+            color: #3b7dd8;
+        }
+        /* Страница продуктов */
+        .products-page {
+            padding: 100px 0 60px;
+        }
+        /* Хлебные крошки */
+        .breadcrumbs {
+            background-color: #f9f9f9;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+        .breadcrumbs ul {
+            display: flex;
+            list-style: none;
+        }
+        .breadcrumbs li {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs li:not(:last-child):after {
+            content: '/';
+            margin-left: 10px;
+            color: #999;
+        }
+        .breadcrumbs a {
+            color: #3b7dd8;
+        }
+        /* Заголовки секций */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+        .section-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        /* О компании */
+        .about-atomy {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .about-atomy h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .about-atomy p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #666;
+        }
+        /* Факты компании */
+        .atomy-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .fact {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #3b7dd8;
+        }
+        .fact i {
+            font-size: 1.5rem;
+        }
+        /* Фильтры категорий */
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .filter-btn {
+            padding: 8px 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn.active {
+            background-color: #3b7dd8;
+            color: white;
+            border-color: #3b7dd8;
+        }
+        .filter-btn:hover {
+            border-color: #3b7dd8;
+        }
+        /* Сетка товаров */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        /* Карточка товара */
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        /* Метки */
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+        .new {
+            background-color: #3b7dd8;
+        }
+        .sale {
+            background-color: #e74c3c;
+        }
+        .bestseller {
+            background-color: #f39c12;
+        }
+        /* Информация о товаре */
+        .product-info {
+            padding: 20px;
+        }
+        .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .price {
+            font-weight: 600;
+            color: #3b7dd8;
+            font-size: 1.1rem;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .volume {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        /* Маленькая кнопка */
+        .btn-small {
+            padding: 8px 15px;
+            background-color: #3b7dd8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-small:hover {
+            background-color: #2a6bc7;
+        }
+        /* Пагинация */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .page-number, .page-nav {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+        }
+        .page-number.active {
+            background-color: #3b7dd8;
+            color: white;
+            border-color: #3b7dd8;
+        }
+        .page-number:hover, .page-nav:hover {
+            border-color: #3b7dd8;
+        }
+        .page-nav.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        /* Преимущества Atomy */
+        .atomy-advantages {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 40px;
+        }
+        .atomy-advantages h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .advantage-card {
+            text-align: center;
+            padding: 20px;
+        }
+        .advantage-icon {
+            font-size: 2.5rem;
+            color: #3b7dd8;
+            margin-bottom: 20px;
+        }
+        .advantage-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .advantage-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        /* Подвал */
+        .main-footer {
+            background-color: #333;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: #3b7dd8;
+        }
+        /* Социальные сети */
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #444;
+            color: white;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        /* Цвета соцсетей */
+        .whatsapp {
+            background-color: #25D366;
+        }
+        .vk {
+            background-color: #4C75A3;
+        }
+        .telegram {
+            background-color: #0088cc;
+        }
+        .instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+        /* Подвал нижний */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        /* Адаптация */
+        @media(max-width: 992px) {
+            .main-nav {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .modal-product {
+                grid-template-columns: 1fr;
+            }
+            .modal-product-image {
+                height: 250px;
+            }
+        }
+        @media(max-width: 768px) {
+            .cart-sidebar {
+                width: 320px;
+            }
+            .cart-icon {
+                margin-left: 15px;
+            }
+            .modal-content {
+                width: 90%;
+                margin: 10% auto;
+                padding: 20px;
+            }
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-filter {
+                overflow-x: auto;
+                padding-bottom: 10px;
+                flex-wrap: nowrap;
+            }
+        }
+        @media(max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fas fa-spa"></i></span>
+                    <span class="logo-text">ATOMY MOSCOW</span>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="about.html">О нас</a></li>
+                        <li class="active"><a href="products.html">Продукция</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <div class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Корзина -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Ваша корзина</h3>
+            <span class="close-cart" id="closeCart">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Товары сюда -->
+        </div>
+        <div class="cart-total">
+            Итого: <span class="total-price" id="totalPrice">0 ₽</span>
+        </div>
+        <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
+    </div>
+    <!-- Модальное окно товара -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="modal-product">
+                <div class="modal-product-image" id="modalProductImage"></div>
+                <div class="modal-product-info">
+                    <h3 id="modalProductTitle">Название товара</h3>
+                    <div class="modal-product-price">
+                        <span class="old-price" id="modalOldPrice"></span>
+                        <span class="current-price" id="modalCurrentPrice">0 ₽</span>
+                    </div>
+                    <span class="volume" id="modalVolume"></span>
+                    <p class="modal-product-description" id="modalProductDescription"></p>
+                    <ul class="modal-product-features" id="modalProductFeatures"></ul>
+                    <div class="modal-product-actions">
+                        <button class="btn-add-to-cart" id="addToCartBtn">Добавить в корзину</button>
+                        <button class="btn-wishlist" id="wishlistBtn"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Хлебные крошки -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li>Продукция</li>
+            </ul>
+        </div>
+    </section>
+    <!-- Страница продукции -->
+    <section class="products-page">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Продукция Atomy</h2>
+                <p class="section-subtitle">Более 150 наименований косметики и средств ухода из Южной Кореи</p>
+            </div>
+            <!-- О компании -->
+            <div class="about-atomy">
+                <h3>О компании Atomy</h3>
+                <p>Atomy - это ведущий южнокорейский бренд косметики и средств для ухода за кожей, основанный в 2009 году. Компания следует философии "Absolute Quality, Absolute Price", предлагая продукцию премиум-класса по доступным ценам.</p>
+                <p>Вся продукция Atomy производится на современных заводах в Южной Корее с использованием передовых технологий и натуральных ингредиентов. Компания имеет международные сертификаты качества и многочисленные награды в области косметологии.</p>
+                <div class="atomy-facts">
+                    <div class="fact"><i class="fas fa-globe-asia"></i><span>Представлена в 20+ странах</span></div>
+                    <div class="fact"><i class="fas fa-award"></i><span>30+ международных наград</span></div>
+                    <div class="fact"><i class="fas fa-flask"></i><span>Собственные исследовательские центры</span></div>
+                </div>
+            </div>
+            <!-- Категории товаров -->
+            <div class="product-categories">
+                <div class="category-filter">
+                    <button class="filter-btn active" data-category="all">Все товары</button>
+                    <button class="filter-btn" data-category="skincare">Уход за кожей</button>
+                    <button class="filter-btn" data-category="makeup">Макияж</button>
+                    <button class="filter-btn" data-category="masks">Маски</button>
+                    <button class="filter-btn" data-category="hair">Волосы</button>
+                    <button class="filter-btn" data-category="body">Уход за телом</button>
+                    <button class="filter-btn" data-category="men">Для мужчин</button>
+                    <button class="filter-btn" data-category="health">Здоровье</button>
+                </div>
+                <!-- Список товаров -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Товары будут вставлены сюда через скрипт -->
+                    <!-- Пример товара (может повторяться динамически) -->
+                    <div class="product-card" data-category="skincare" data-product-id="product1">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Product');">
+                            <span class="product-badge new">Новинка</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Очищающий гель Atomy</h3>
+                            <p class="product-desc">Мягкое очищение без стянутости для всех типов кожи</p>
+                            <div class="product-meta">
+                                <span class="price">1,490 ₽</span>
+                                <span class="volume">150 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="masks" data-product-id="product2">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Mask');">
+                            <span class="product-badge sale">Акция -20%</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Увлажняющая маска</h3>
+                            <p class="product-desc">Интенсивное увлажнение на 24 часа с гиалуроновой кислотой</p>
+                            <div class="product-meta">
+                                <span class="price old-price">1,200 ₽</span>
+                                <span class="price">890 ₽</span>
+                                <span class="volume">10 шт</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="makeup" data-product-id="product3">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+BB+Cream');"></div>
+                        <div class="product-info">
+                            <h3>BB крем "Идеальная кожа"</h3>
+                            <p class="product-desc">Тональное средство с SPF 35 и уходовыми компонентами</p>
+                            <div class="product-meta">
+                                <span class="price">1,790 ₽</span>
+                                <span class="volume">50 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="skincare" data-product-id="product4">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Toner');"></div>
+                        <div class="product-info">
+                            <h3>Тоник для лица</h3>
+                            <p class="product-desc">Восстанавливает pH баланс, подготавливает кожу к уходу</p>
+                            <div class="product-meta">
+                                <span class="price">1,350 ₽</span>
+                                <span class="volume">200 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="hair" data-product-id="product5">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Shampoo');"></div>
+                        <div class="product-info">
+                            <h3>Шампунь для волос</h3>
+                            <p class="product-desc">Мягкое очищение и укрепление волосяных луковиц</p>
+                            <div class="product-meta">
+                                <span class="price">1,250 ₽</span>
+                                <span class="volume">400 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="skincare" data-product-id="product6">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Night+Cream');">
+                            <span class="product-badge bestseller">Хит</span>
+                        </div>
+                        <div class="product-info">
+                            <h3>Ночной крем</h3>
+                            <p class="product-desc">Интенсивное восстановление кожи во время сна</p>
+                            <div class="product-meta">
+                                <span class="price">2,190 ₽</span>
+                                <span class="volume">50 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="body" data-product-id="product7">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Lotion');"></div>
+                        <div class="product-info">
+                            <h3>Увлажняющий лосьон для тела</h3>
+                            <p class="product-desc">Легкая текстура с экстрактом алоэ вера</p>
+                            <div class="product-meta">
+                                <span class="price">1,650 ₽</span>
+                                <span class="volume">300 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="men" data-product-id="product8">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Men');"></div>
+                        <div class="product-info">
+                            <h3>Мужской уход 3-в-1</h3>
+                            <p class="product-desc">Очищение, увлажнение и защита для мужской кожи</p>
+                            <div class="product-meta">
+                                <span class="price">1,850 ₽</span>
+                                <span class="volume">150 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="health" data-product-id="product9">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Collagen');"></div>
+                        <div class="product-info">
+                            <h3>Коллагеновый напиток</h3>
+                            <p class="product-desc">Поддержка кожи, волос и ногтей изнутри</p>
+                            <div class="product-meta">
+                                <span class="price">2,990 ₽</span>
+                                <span class="volume">30 пакетиков</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="skincare" data-product-id="product10">
+                        <div class="product-image" style="background-image: url('https://via.placeholder.com/300x300?text=Atomy+Serum');"></div>
+                        <div class="product-info">
+                            <h3>Сыворотка с витамином С</h3>
+                            <p class="product-desc">Осветление и выравнивание тона кожи</p>
+                            <div class="product-meta">
+                                <span class="price">2,490 ₽</span>
+                                <span class="volume">30 мл</span>
+                                <button class="btn btn-small view-details">Подробнее</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Пагинация (пример) -->
+                <div class="pagination" id="pagination">
+                    <a href="#" class="page-nav disabled" id="prevPage">&laquo; Prev</a>
+                    <a href="#" class="page-number active" data-page="1">1</a>
+                    <a href="#" class="page-number" data-page="2">2</a>
+                    <a href="#" class="page-number" data-page="3">3</a>
+                    <a href="#" class="page-nav" id="nextPage">Next &raquo;</a>
+                </div>
+            </div>
+            <!-- Преимущества -->
+            <div class="atomy-advantages">
+                <h3>Преимущества продукции Atomy</h3>
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon"><i class="fas fa-star"></i></div>
+                        <h4>Высокое качество</h4>
+                        <p>Используем только натуральные ингредиенты и современные технологии производства.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon"><i class="fas fa-wallet"></i></div>
+                        <h4>Доступные цены</h4>
+                        <p>Премиум качество по ценам, доступным для каждого покупателя.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon"><i class="fas fa-globe"></i></div>
+                        <h4>Международное присутствие</h4>
+                        <p>Продукция представлена более чем в 20 странах мира.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+           <ul>
+        <li><i class="fas fa-phone"></i> +7 (777) 777-77-77</li>
+        <li><i class="fas fa-envelope"></i> AtomyMoscow@bk.ru</li>
+      </ul>
+
+                </div>
+                <div class="footer-col">
+                    <h3>Социальные сети</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link whatsapp" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link vk" aria-label="VK"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link telegram" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#" class="social-link instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 ATOMY MOSCOW. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartIcon = document.getElementById('cartIcon');
+            const cartSidebar = document.getElementById('cartSidebar');
+            const closeCart = document.getElementById('closeCart');
+            const cartOverlay = document.getElementById('cartOverlay');
+            const cartCount = document.getElementById('cartCount');
+            const cartItemsContainer = document.getElementById('cartItems');
+            const totalPriceEl = document.getElementById('totalPrice');
+            const productModal = document.getElementById('productModal');
+            const modalCloseBtn = document.getElementById('closeModal');
+            const modalProductImage = document.getElementById('modalProductImage');
+            const modalProductTitle = document.getElementById('modalProductTitle');
+            const modalOldPrice = document.getElementById('modalOldPrice');
+            const modalCurrentPrice = document.getElementById('modalCurrentPrice');
+            const modalVolume = document.getElementById('modalVolume');
+            const modalDescription = document.getElementById('modalProductDescription');
+            const modalFeatures = document.getElementById('modalProductFeatures');
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            const wishlistBtn = document.getElementById('wishlistBtn');
+
+            let cart = [];
+            let productsData = {};
+
+
+            const products = [
+                {
+                    id: 'product1',
+                    title: 'Очищающий гель Atomy',
+                    desc: 'Мягкое очищение без стянутости для всех типов кожи',
+                    price: 1490,
+                    oldPrice: null,
+                    volume: '150 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Product',
+                    category: 'skincare',
+                    features: ['Натуральные ингредиенты', 'Без парабенов', 'Гипоаллергенно'],
+                },
+                {
+                    id: 'product2',
+                    title: 'Увлажняющая маска',
+                    desc: 'Интенсивное увлажнение на 24 часа с гиалуроновой кислотой',
+                    price: 890,
+                    oldPrice: 1200,
+                    volume: '10 шт',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Mask',
+                    category: 'masks',
+                    features: ['Гиалуроновая кислота', 'Без парабенов', 'Подходит для всех типов кожи'],
+                },
+                {
+                    id: 'product3',
+                    title: 'BB крем "Идеальная кожа"',
+                    desc: 'Тональное средство с SPF 35 и уходовыми компонентами',
+                    price: 1790,
+                    oldPrice: null,
+                    volume: '50 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+BB+Cream',
+                    category: 'makeup',
+                    features: ['SPF 35', 'Увлажнение', 'Выравнивание тона'],
+                },
+                {
+                    id: 'product4',
+                    title: 'Тоник для лица',
+                    desc: 'Восстанавливает pH баланс, подготавливает кожу к уходу',
+                    price: 1350,
+                    oldPrice: null,
+                    volume: '200 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Toner',
+                    category: 'skincare',
+                    features: ['Баланс pH', 'Обновление кожи', 'Подготовка к уходу'],
+                },
+                {
+                    id: 'product5',
+                    title: 'Шампунь для волос',
+                    desc: 'Мягкое очищение и укрепление волосяных луковиц',
+                    price: 1250,
+                    oldPrice: null,
+                    volume: '400 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Shampoo',
+                    category: 'hair',
+                    features: ['Укрепление', 'Без сульфатов', 'Для всех типов волос'],
+                },
+                {
+                    id: 'product6',
+                    title: 'Ночной крем',
+                    desc: 'Интенсивное восстановление кожи во время сна',
+                    price: 2190,
+                    oldPrice: null,
+                    volume: '50 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Night+Cream',
+                    category: 'skincare',
+                    features: ['Восстановление', 'Антивозрастной', 'Глубокое питание'],
+                },
+                {
+                    id: 'product7',
+                    title: 'Увлажняющий лосьон для тела',
+                    desc: 'Легкая текстура с экстрактом алоэ вера',
+                    price: 1650,
+                    oldPrice: null,
+                    volume: '300 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Lotion',
+                    category: 'body',
+                    features: ['Алоэ вера', 'Увлажнение', 'Быстро впитывается'],
+                },
+                {
+                    id: 'product8',
+                    title: 'Мужской уход 3-в-1',
+                    desc: 'Очищение, увлажнение и защита для мужской кожи',
+                    price: 1850,
+                    oldPrice: null,
+                    volume: '150 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Men',
+                    category: 'men',
+                    features: ['Многофункциональность', 'Глубокое очищение', 'Для чувствительной кожи'],
+                },
+                {
+                    id: 'product9',
+                    title: 'Коллагеновый напиток',
+                    desc: 'Поддержка кожи, волос и ногтей изнутри',
+                    price: 2990,
+                    oldPrice: null,
+                    volume: '30 пакетиков',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Collagen',
+                    category: 'health',
+                    features: ['Глубокое восстановление', 'Без добавок', 'Высокая эффективность'],
+                },
+                {
+                    id: 'product10',
+                    title: 'Сыворотка с витамином С',
+                    desc: 'Осветление и выравнивание тона кожи',
+                    price: 2490,
+                    oldPrice: null,
+                    volume: '30 мл',
+                    image: 'https://via.placeholder.com/600x600?text=Atomy+Serum',
+                    category: 'skincare',
+                    features: ['Осветление', 'Антивозрастной эффект', 'Гипоаллергенно'],
+                }
+            ];
+
+
+            products.forEach(p => {
+                productsData[p.id] = p;
+            });
+
+            
+            function updateCart() {
+                let total = 0;
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(item => {
+                    const product = productsData[item.id];
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-item';
+
+                    itemDiv.innerHTML = `
+                        <div class="cart-item-img" style="background-image: url('${product.image}');"></div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${product.title}</div>
+                            <div class="cart-item-price">${product.price} ₽</div>
+                            <div class="cart-item-remove" data-id="${product.id}">Удалить</div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemDiv);
+                    total += product.price;
+                });
+                totalPriceEl.textContent = total + ' ₽';
+                cartCount.textContent = cart.length;
+            }
+
+            
+            cartIcon.addEventListener('click', () => {
+                document.getElementById('cartSidebar').classList.add('active');
+                document.getElementById('cartOverlay').classList.add('active');
+            });
+           
+            document.getElementById('closeCart').addEventListener('click', () => {
+                document.getElementById('cartSidebar').classList.remove('active');
+                document.getElementById('cartOverlay').classList.remove('active');
+            });
+            document.getElementById('cartOverlay').addEventListener('click', () => {
+                document.getElementById('cartSidebar').classList.remove('active');
+                document.getElementById('cartOverlay').classList.remove('active');
+            });
+
+            
+            document.getElementById('cartItems').addEventListener('click', (e) => {
+                if (e.target.classList.contains('cart-item-remove')) {
+                    const id = e.target.getAttribute('data-id');
+                    cart = cart.filter(ci => ci.id !== id);
+                    updateCart();
+                }
+            });
+
+            
+            document.querySelectorAll('.view-details').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const productId = btn.closest('.product-card').getAttribute('data-product-id');
+                    const product = productsData[productId];
+                    
+                    document.getElementById('modalProductTitle').textContent = product.title;
+                    document.getElementById('modalProductDescription').textContent = product.desc;
+                    document.getElementById('modalProductImage').style.backgroundImage = `url('${product.image}')`;
+                    if (product.oldPrice) {
+                        document.getElementById('modalOldPrice').textContent = product.oldPrice + ' ₽';
+                        document.getElementById('modalOldPrice').style.display = 'inline';
+                    } else {
+                        document.getElementById('modalOldPrice').style.display = 'none';
+                    }
+                    document.getElementById('modalCurrentPrice').textContent = product.price + ' ₽';
+                    document.getElementById('modalVolume').textContent = product.volume;
+
+                    
+                    modalFeatures.innerHTML = '';
+                    product.features.forEach(f => {
+                        const li = document.createElement('li');
+                        li.textContent = f;
+                        modalFeatures.appendChild(li);
+                    });
+
+                    
+                    document.getElementById('addToCartBtn').onclick = () => {
+                        cart.push({id: product.id});
+                        updateCart();
+                        
+                        closeModal();
+                    };
+
+                    
+                    document.getElementById('wishlistBtn').onclick = () => {
+                        alert('Добавлено в список желаний: ' + product.title);
+                    };
+
+                    
+                    showModal();
+                });
+            });
+
+            
+            function showModal() {
+                document.getElementById('productModal').classList.add('show');
+            }
+           
+            function closeModal() {
+                document.getElementById('productModal').classList.remove('show');
+            }
+            
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('productModal')) {
+                    closeModal();
+                }
+            });
+
+            
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productsGrid = document.getElementById('productsGrid');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    btn.classList.add('active');
+                    const category = btn.getAttribute('data-category');
+                    document.querySelectorAll('.product-card').forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            
+            const prevPageBtn = document.getElementById('prevPage');
+            const nextPageBtn = document.getElementById('nextPage');
+            const pageNumbers = document.querySelectorAll('.page-number');
+            let currentPage = 1;
+            const totalPages = 3;
+
+            function updatePagination() {
+                pageNumbers.forEach(p => {
+                    p.classList.remove('active');
+                    if (parseInt(p.dataset.page) === currentPage) {
+                        p.classList.add('active');
+                    }
+                });
+                
+                if (currentPage === 1) {
+                    document.getElementById('prevPage').classList.add('disabled');
+                } else {
+                    document.getElementById('prevPage').classList.remove('disabled');
+                }
+                if (currentPage === totalPages) {
+                    document.getElementById('nextPage').classList.add('disabled');
+                } else {
+                    document.getElementById('nextPage').classList.remove('disabled');
+                }
+            }
+
+            pageNumbers.forEach(p => {
+                p.addEventListener('click', () => {
+                    currentPage = parseInt(p.dataset.page);
+                    updatePagination();
+                    
+                });
+            });
+            prevPageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage > 1) {
+                    currentPage--;
+                    updatePagination();
+                }
+            });
+            nextPageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updatePagination();
+                }
+            });
+            updatePagination();
+
+            
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.querySelector('.main-nav');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                if (mainNav.style.display === 'flex') {
+                    mainNav.style.display = 'none';
+                } else {
+                    mainNav.style.display = 'flex';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

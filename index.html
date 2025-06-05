@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Atomy Moscow - Премиальная корейская косметика</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+.logo i {
+  color: #3b7dd8;
+  margin-right: 10px;
+  font-size: 1.8rem;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li {
+  margin-left: 30px;
+  position: relative;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+nav ul li a:hover,
+li.active a {
+  color: #3b7dd8;
+}
+.cart-icon {
+  position: relative;
+  margin-left: 30px;
+  cursor: pointer;
+}
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+.mobile-menu {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+@media(max-width: 992px){
+  nav ul {
+    display: none;
+    position: absolute;
+    top: 60px; right: 20px;
+    background: #fff;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 200px;
+  }
+  nav ul.show {
+    display: flex;
+  }
+  nav ul li {
+    margin: 10px 0;
+  }
+  .mobile-menu {
+    display: block;
+  }
+}
+
+
+.hero {
+  margin-top: 80px;
+  height: 80vh;
+  min-height: 500px;
+  background: url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 20px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.hero h1 span {
+  color: #f8d363;
+}
+.hero .subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: #3b7dd8;
+  color: #fff;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #2a6bc7;
+  transform: translateY(-2px);
+}
+
+
+.features {
+  padding: 80px 20px;
+  background: #f9f9f9;
+}
+.features h2 {
+  margin-bottom: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  text-align: center;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+.feature-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.feature-icon {
+  font-size: 2.5rem;
+  color: #3b7dd8;
+  margin-bottom: 15px;
+}
+.feature-card h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  color: #333;
+}
+.feature-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+
+.popular-products {
+  padding: 80px 20px;
+}
+.popular-products h2 {
+  margin-bottom: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  text-align: center;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+  gap: 30px;
+}
+.product-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.product-image {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+.product-info {
+  padding: 20px;
+}
+.product-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.product-info p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+.price {
+  font-weight: 600;
+  color: #3b7dd8;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.btn-outline {
+  border: 2px solid #3b7dd8;
+  color: #3b7dd8;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+.btn-outline:hover {
+  background-color: #3b7dd8;
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+}
+
+
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+.cart-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 380px;
+  height: 100%;
+  background: #fff;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+  transition: right 0.3s;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+}
+.cart-sidebar.active {
+  right: 0;
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+.cart-item {
+  display: flex;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+.cart-item:last-child {
+  border-bottom: none;
+}
+.cart-item-img {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.cart-item-info {
+  flex: 1;
+}
+.cart-item-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.cart-item-price {
+  color: #3b7dd8;
+  margin-bottom: 5px;
+}
+.cart-item-remove {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+.quantity-btn {
+  width: 25px;
+  height: 25px;
+  background: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+.quantity-input {
+  width: 40px;
+  text-align: center;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 2px;
+}
+.cart-total {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: right;
+}
+.total-price {
+  color: #3b7dd8;
+}
+.checkout-btn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Подвал */
+footer {
+  background: #222;
+  color: #ccc;
+  padding: 50px 20px;
+}
+footer h3 {
+  margin-bottom: 15px;
+  color: #fff;
+}
+footer ul {
+  list-style: none;
+  margin-bottom: 20px;
+}
+footer ul li {
+  margin-bottom: 10px;
+}
+footer ul li i {
+  margin-right: 10px;
+  color: #3b7dd8;
+}
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+.social-link {
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #444;
+  color: #fff;
+  transition: all 0.3s;
+}
+.social-link:hover {
+  transform: translateY(-3px);
+}
+.social-link.whatsapp { background:#25D366; }
+.social-link.vk { background:#4C75A3; }
+.social-link.telegram { background:#0088cc; }
+.social-link.instagram { background:linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+@media(max-width: 992px){
+  h1 {
+    font-size: 2.2rem;
+  }
+  .cart-sidebar {
+    width: 90%;
+    right: -100%;
+  }
+  .cart-sidebar.active {
+    right: 0;
+  }
+
+  .features-grid, .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner container">
+    <div class="logo"><i class="fas fa-spa"></i>ATOMY MOSCOW</div>
+    <nav>
+      <ul id="menu">
+        <li class="active"><a href="index.html">Главная</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li><a href="products.html">Продукция</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li>
+          <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </li>
+      </ul>
+      <div class="mobile-menu" id="menu-toggle"><i class="fas fa-bars"></i></div>
+    </nav>
+  </div>
+</header>
+
+
+<div class="cart-overlay"></div>
+<div class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Ваша корзина</h3>
+    <span class="close-cart">&times;</span>
+  </div>
+  <div class="cart-items"></div>
+  <div class="cart-total">Итого: <span class="total-price">0 ₽</span></div>
+  <button class="btn btn-primary checkout-btn">Оформить заказ</button>
+</div>
+
+
+<div class="modal" id="welcome-modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Добро пожаловать в Atomy Moscow!</h2>
+    <p>Мы рады приветствовать вас в нашем интернет-магазине корейской косметики премиум-класса.</p>
+    <p>Получите скидку 10% на первый заказ по промокоду: <strong>WELCOME10</strong></p>
+    <button class="btn btn-primary" id="close-welcome">Понятно, спасибо!</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Корейская косметика <span>премиум-класса</span></h1>
+      <p class="subtitle">Инновационные формулы с натуральными компонентами для безупречной кожи</p>
+      <a href="products.html" class="btn btn-primary">Каталог продукции</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="features">
+  <div class="container">
+    <h2>Почему выбирают Atomy</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+        <h3>Натуральные ингредиенты</h3>
+        <p>Только безопасные компоненты без вредных добавок</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-flask"></i></div>
+        <h3>Инновационные технологии</h3>
+        <p>Передовые разработки корейских ученых</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-gem"></i></div>
+        <h3>Премиальное качество</h3>
+        <p>Лучшие косметические решения из Кореи</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-ruble-sign"></i></div>
+        <h3>Доступные цены</h3>
+        <p>Высокое качество по разумной стоимости</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="popular-products">
+  <div class="container">
+    <h2>Популярные товары</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1556228578-32223dcccdb6?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');"></div>
+        <div class="product-info">
+          <h3>Очищающий гель</h3>
+          <p>Мягкое очищение без стянутости</p>
+          <div class="price">1,490 ₽</div>
+          <div class="product-actions">
+            <button class="btn btn-outline btn-sm view-details" data-id="1">Подробнее</button>
+            <button class="btn btn-primary btn-sm add-to-cart" data-id="1" data-title="Очищающий гель" data-price="1490" data-image="https://images.unsplash.com/photo-1556228578-32223dcccdb6?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80">В корзину</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1556228578-3f9fa3d8a3d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');"></div>
+        <div class="product-info">
+          <h3>Увлажняющая маска</h3>
+          <p>Интенсивное увлажнение на 24 часа</p>
+          <div class="price">890 ₽</div>
+          <div class="product-actions">
+            <button class="btn btn-outline btn-sm view-details" data-id="2">Подробнее</button>
+            <button class="btn btn-primary btn-sm add-to-cart" data-id="2" data-title="Увлажняющая маска" data-price="890" data-image="https://images.unsplash.com/photo-1556228578-3f9fa3d8a3d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80">В корзину</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1556228578-6d8f2c1c3d3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80');"></div>
+        <div class="product-info">
+          <h3>BB крем</h3>
+          <p>Идеальный тон и уход в одном</p>
+          <div class="price">1,790 ₽</div>
+          <div class="product-actions">
+            <button class="btn btn-outline btn-sm view-details" data-id="3">Подробнее</button>
+            <button class="btn btn-primary btn-sm add-to-cart" data-id="3" data-title="BB крем" data-price="1790" data-image="https://images.unsplash.com/photo-1556228578-6d8f2c1c3d3d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="products.html" class="btn btn-outline">Все товары</a>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:30px;">
+    <div>
+      <h3>Atomy Moscow</h3>
+      <p>Корейская косметика премиум-класса с доставкой по всей России</p>
+    </div>
+    <div>
+      <h3>Меню</h3>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li><a href="products.html">Продукция</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Контакты</h3>
+      <ul>
+        <li><i class="fas fa-phone"></i> +7 (777) 777-77-77</li>
+        <li><i class="fas fa-envelope"></i> AtomyMoscow@bk.ru</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Соцсети</h3>
+      <div class="social-links">
+        <a href="https://wa.me/77777777777" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-link vk"><i class="fab fa-vk"></i></a>
+        <a href="#" class="social-link telegram"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Atomy Moscow. Все права защищены.</p>
+  </div>
+</footer>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('show');
+  });
+  
+  const cartOverlay = document.querySelector('.cart-overlay');
+  const cartSidebar = document.querySelector('.cart-sidebar');
+  const closeCartBtn = document.querySelector('.close-cart');
+  const cartIcon = document.querySelector('.cart-icon');
+  const cartItemsContainer = document.querySelector('.cart-items');
+  const cartCount = document.querySelector('.cart-count');
+  const totalPriceSpan = document.querySelector('.total-price');
+  const checkoutBtn = document.querySelector('.checkout-btn');
+  const addToCartBtns = document.querySelectorAll('.add-to-cart');
+  
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  
+
+  function updateCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+  
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+    
+   
+    cartItemsContainer.innerHTML = '';
+    
+    let totalPrice = 0;
+    
+    
+    cart.forEach((item, index) => {
+      const itemTotal = item.price * item.quantity;
+      totalPrice += itemTotal;
+      
+      const cartItemEl = document.createElement('div');
+      cartItemEl.className = 'cart-item';
+      cartItemEl.innerHTML = `
+        <div class="cart-item-img" style="background-image: url('${item.image}')"></div>
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.title}</div>
+          <div class="cart-item-price">${item.price.toLocaleString()} ₽ × ${item.quantity} шт</div>
+          <div class="cart-item-quantity">
+            <button class="quantity-btn minus" data-index="${index}">-</button>
+            <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+            <button class="quantity-btn plus" data-index="${index}">+</button>
+          </div>
+          <div class="cart-item-remove" data-index="${index}">Удалить</div>
+        </div>
+      `;
+      
+      cartItemsContainer.appendChild(cartItemEl);
+    });
+    
+    // Обновляем общую сумму
+    totalPriceSpan.textContent = `${totalPrice.toLocaleString()} ₽`;
+    
+    // Добавляем обработчики событий для кнопок внутри корзины
+    document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+      btn.addEventListener('click', decreaseQuantity);
+    });
+    
+    document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+      btn.addEventListener('click', increaseQuantity);
+    });
+    
+    document.querySelectorAll('.quantity-input').forEach(input => {
+      input.addEventListener('change', changeQuantity);
+    });
+    
+    document.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', removeItem);
+    });
+  }
+  
+  // Функции для работы с количеством товаров
+  function decreaseQuantity(e) {
+    const index = e.target.dataset.index;
+    if (cart[index].quantity > 1) {
+      cart[index].quantity--;
+      updateCart();
+    }
+  }
+  
+  function increaseQuantity(e) {
+    const index = e.target.dataset.index;
+    cart[index].quantity++;
+    updateCart();
+  }
+  
+  function changeQuantity(e) {
+    const index = e.target.dataset.index;
+    const newQuantity = parseInt(e.target.value);
+    if (newQuantity > 0) {
+      cart[index].quantity = newQuantity;
+      updateCart();
+    }
+  }
+  
+  function removeItem(e) {
+    const index = e.target.dataset.index;
+    cart.splice(index, 1);
+    updateCart();
+  }
+  
+  // Добавление товара в корзину
+  addToCartBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const id = this.dataset.id;
+      const title = this.dataset.title;
+      const price = parseInt(this.dataset.price);
+      const image = this.dataset.image;
+      
+      // Проверяем, есть ли товар уже в корзине
+      const existingItem = cart.find(item => item.id === id);
+      
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({
+          id,
+          title,
+          price,
+          image,
+          quantity: 1
+        });
+      }
+      
+      updateCart();
+      showCart();
+      
+      // Показываем уведомление
+      alert(`Товар "${title}" добавлен в корзину!`);
+    });
+  });
+  
+  // Открытие/закрытие корзины
+  cartIcon.addEventListener('click', showCart);
+  closeCartBtn.addEventListener('click', hideCart);
+  cartOverlay.addEventListener('click', hideCart);
+  
+  function showCart() {
+    cartOverlay.classList.add('active');
+    cartSidebar.classList.add('active');
+  }
+  
+  function hideCart() {
+    cartOverlay.classList.remove('active');
+    cartSidebar.classList.remove('active');
+  }
+  
+  // Оформление заказа
+  checkoutBtn.addEventListener('click', function() {
+    if (cart.length === 0) {
+      alert('Ваша корзина пуста!');
+    } else {
+      alert(`Заказ оформлен! Сумма: ${totalPriceSpan.textContent}\nСкоро с вами свяжется наш менеджер.`);
+      cart = [];
+      updateCart();
+      hideCart();
+    }
+  });
+  
+  // Инициализация корзины
+  updateCart();
+  
+  // Модальное окно приветствия
+  const welcomeModal = document.getElementById('welcome-modal');
+  const closeWelcomeBtn = document.getElementById('close-welcome');
+  const closeModalBtn = document.querySelector('.close-modal');
+  
+  // Показываем модальное окно при первом посещении
+  if (!localStorage.getItem('welcomeShown')) {
+    setTimeout(() => {
+      welcomeModal.style.display = 'flex';
+      localStorage.setItem('welcomeShown', 'true');
+    }, 1000);
+  }
+  
+  // Закрытие модального окна
+  closeWelcomeBtn.addEventListener('click', function() {
+    welcomeModal.style.display = 'none';
+  });
+  
+  closeModalBtn.addEventListener('click', function() {
+    welcomeModal.style.display = 'none';
+  });
+  
+  welcomeModal.addEventListener('click', function(e) {
+    if (e.target === welcomeModal) {
+      welcomeModal.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>

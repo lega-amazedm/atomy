@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>О компании - Atomy Moscow</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  /* Общие стили */
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+  body {
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+  }
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+  }
+  ul {
+      list-style: none;
+  }
+  a {
+      text-decoration: none;
+      color: inherit;
+  }
+  img {
+      max-width: 100%;
+  }
+  /* Хлебные крошки */
+  .breadcrumbs {
+      padding: 15px 0;
+      background-color: #f5f5f5;
+  }
+  .breadcrumbs ul {
+      display: flex;
+      list-style: none;
+  }
+  .breadcrumbs li {
+      margin-right: 10px;
+      font-size: 0.9rem;
+  }
+  .breadcrumbs li:not(:last-child):after {
+      content: '/';
+      margin-left: 10px;
+      color: #777;
+  }
+  .breadcrumbs a {
+      color: #3b7dd8;
+  }
+  .breadcrumbs a:hover {
+      text-decoration: underline;
+  }
+  /* О компании */
+  .about-section {
+      padding: 80px 0;
+  }
+  .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+  }
+  .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: #333;
+      font-family: 'Playfair Display', serif;
+  }
+  .section-subtitle {
+      font-size: 1.1rem;
+      color: #777;
+  }
+  .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 60px;
+  }
+  .about-image {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  .about-text h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #3b7dd8;
+  }
+  .about-text p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      color: #555;
+  }
+  .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 30px;
+  }
+  .about-feature {
+      display: flex;
+      align-items: center;
+  }
+  .about-feature i {
+      color: #3b7dd8;
+      margin-right: 10px;
+      font-size: 1.1rem;
+  }
+  /* Миссия */
+  .mission-section {
+      background-color: #f9f9f9;
+      padding: 60px;
+      border-radius: 8px;
+      margin-top: 50px;
+  }
+  .mission-section h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #333;
+  }
+  .mission-section p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+      color: #555;
+  }
+  .mission-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+  }
+  .mission-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .mission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  .mission-icon {
+      font-size: 2.5rem;
+      color: #3b7dd8;
+      margin-bottom: 20px;
+  }
+  .mission-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #333;
+  }
+  .mission-card p {
+      color: #666;
+      line-height: 1.6;
+      text-align: center;
+  }
+  /* Адаптивность */
+  @media (max-width: 992px) {
+      .about-content {
+          grid-template-columns: 1fr;
+      }
+      
+      .about-image {
+          height: 400px;
+      }
+  }
+  @media (max-width: 768px) {
+      .section-title {
+          font-size: 1.8rem;
+      }
+      
+      .about-features {
+          grid-template-columns: 1fr;
+      }
+      
+      .mission-section {
+          padding: 40px 20px;
+      }
+    }
+  /* Шапка */
+  .main-header {
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+  }
+  .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+  }
+  .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+  }
+  .logo-icon {
+      color: #3b7dd8;
+      margin-right: 10px;
+      font-size: 1.5rem;
+  }
+  .main-nav ul {
+      display: flex;
+  }
+  .main-nav li {
+      margin-left: 30px;
+  }
+  .main-nav a {
+      font-weight: 500;
+      transition: color 0.3s;
+  }
+  .main-nav a:hover, .main-nav .active a {
+      color: #3b7dd8;
+  }
+  .header-right {
+      display: flex;
+      align-items: center;
+  }
+  .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 20px;
+  }
+  /* Корзина и иконки */
+  .cart-icon {
+      position: relative;
+      margin-left: 20px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #333;
+  }
+  .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+  }
+  /* Карточка корзины */
+  .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      padding: 20px;
+      overflow-y: auto;
+  }
+  .cart-sidebar.active {
+      right: 0;
+  }
+  .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+  }
+  .close-cart {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #777;
+  }
+  .cart-items {
+      margin-bottom: 20px;
+  }
+  .cart-item {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f5f5f5;
+  }
+  .cart-item-img {
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      background-position: center;
+      margin-right: 15px;
+      border-radius: 5px;
+  }
+  .cart-item-details {
+      flex: 1;
+  }
+  .cart-item-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 0.95rem;
+  }
+  .cart-item-price {
+      color: #3b7dd8;
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+  }
+  .cart-item-remove {
+      color: #e74c3c;
+      cursor: pointer;
+      font-size: 0.8rem;
+  }
+  .cart-total {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-align: right;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+  }
+  .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #3b7dd8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s;
+  }
+  .checkout-btn:hover {
+      background-color: #2a6bc7;
+  }
+  /* Модальное окно товара */
+  .modal {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+  }
+  .modal.show {
+      display: block;
+      opacity: 1;
+  }
+  .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+      width: 80%;
+      max-width: 800px;
+      position: relative;
+      transform: translateY(-50px);
+      transition: transform 0.3s ease;
+  }
+  .modal.show .modal-content {
+      transform: translateY(0);
+  }
+  .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.3s;
+  }
+  .close-modal:hover {
+      color: #333;
+  }
+  /* Детали товара в модалке */
+  .modal-product {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+  }
+  .modal-product-image {
+      background-size: cover;
+      background-position: center;
+      height: 350px;
+      border-radius: 8px;
+  }
+  .modal-product-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #3b7dd8;
+  }
+  .modal-product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3b7dd8;
+      margin: 20px 0;
+  }
+  .modal-product-price .old-price {
+      text-decoration: line-through;
+      font-size: 1.2rem;
+      color: #656d78;
+      margin-right: 10px;
+  }
+  .modal-product-description {
+      margin-bottom: 20px;
+      line-height: 1.6;
+  }
+  .modal-product-features {
+      margin-bottom: 25px;
+  }
+  .modal-product-features li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 25px;
+  }
+  .modal-product-features li:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: #3b7dd8;
+  }
+  .modal-product-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+  }
+  .btn-add-to-cart {
+      background-color: #3b7dd8;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+  }
+  .btn-add-to-cart:hover {
+      background-color: #2a6bc7;
+  }
+  .btn-wishlist {
+      background-color: transparent;
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+  }
+  .btn-wishlist:hover {
+      border-color: #3b7dd8;
+      color: #3b7dd8;
+  }
+  /* Страница продукта */
+  .products-page {
+      padding: 100px 0 60px;
+  }
+  /* Заголовки секций */
+  .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+  }
+  .section-title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #333;
+      font-family: 'Playfair Display', serif;
+  }
+  .section-subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+  }
+  /* О компании */
+  .about-atomy {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+  }
+  .about-atomy h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #333;
+  }
+  .about-atomy p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #666;
+  }
+  /* Факты компании */
+  .atomy-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+  }
+  .fact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #3b7dd8;
+  }
+  .fact i {
+      font-size: 1.5rem;
+  }
+  /* Фильтры категорий */
+  .category-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+  }
+  .filter-btn {
+      padding: 8px 15px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+  }
+  .filter-btn.active {
+      background-color: #3b7dd8;
+      color: white;
+      border-color: #3b7dd8;
+  }
+  .filter-btn:hover {
+      border-color: #3b7dd8;
+  }
+  /* Товары */
+  .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+  }
+  /* Карточка товара */
+  .product-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+  .product-image {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+  }
+  /* Метки товара */
+  .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+  }
+  .new {
+      background-color: #3b7dd8;
+  }
+  .sale {
+      background-color: #e74c3c;
+  }
+  .bestseller {
+      background-color: #f39c12;
+  }
+  /* Информация о товаре */
+  .product-info {
+      padding: 20px;
+  }
+  .product-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #333;
+  }
+  .product-desc {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      line-height: 1.5;
+  }
+  .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+  }
+  .price {
+      font-weight: 600;
+      color: #3b7dd8;
+      font-size: 1.1rem;
+  }
+  .old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+  }
+  .volume {
+      color: #999;
+      font-size: 0.9rem;
+  }
+  /* Маленькая кнопка */
+  .btn-small {
+      padding: 8px 15px;
+      background-color: #3b7dd8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+  .btn-small:hover {
+      background-color: #2a6bc7;
+  }
+  /* Пагинация */
+  .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+  }
+  .page-number, .page-nav {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s;
+  }
+  .page-number.active {
+      background-color: #3b7dd8;
+      color: white;
+      border-color: #3b7dd8;
+  }
+  .page-number:hover, .page-nav:hover {
+      border-color: #3b7dd8;
+  }
+  .page-nav.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+  }
+  /* Преимущества */
+  .atomy-advantages {
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-top: 40px;
+  }
+  .atomy-advantages h3 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #333;
+      font-family: 'Playfair Display', serif;
+  }
+  .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+  }
+  .advantage-card {
+      text-align: center;
+      padding: 20px;
+    }
+  .advantage-icon {
+      font-size: 2.5rem;
+      color: #3b7dd8;
+      margin-bottom: 20px;
+  }
+  .advantage-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #333;
+  }
+  .advantage-card p {
+      color: #666;
+      line-height: 1.6;
+  }
+  /* Подвал */
+  .main-footer {
+      background-color: #333;
+      color: white;
+      padding: 50px 0 20px;
+  }
+  .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+  }
+  .footer-col h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #fff;
+  }
+  .footer-col ul li {
+      margin-bottom: 10px;
+  }
+  .footer-col ul li i {
+      margin-right: 10px;
+      color: #3b7dd8;
+  }
+  /* Социальные сети */
+  .social-links {
+      display: flex;
+      gap: 15px;
+  }
+  .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #444;
+      color: white;
+      transition: all 0.3s;
+  }
+  .social-link:hover {
+      transform: translateY(-3px);
+  }
+  /* Цвета соцсетей */
+  .whatsapp {
+      background-color: #25D366;
+  }
+  .vk {
+      background-color: #4C75A3;
+  }
+  .telegram {
+      background-color: #0088cc;
+  }
+  .instagram {
+      background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+  }
+  /* Подвал нижний */
+  .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+      color: #aaa;
+  }
+  /* Адаптивность */
+  @media(max-width: 992px) {
+      .main-nav {
+          display: none;
+      }
+      
+      .mobile-menu-btn {
+          display: block;
+      }
+      
+      .modal-product {
+          grid-template-columns: 1fr;
+      }
+      
+      .modal-product-image {
+          height: 250px;
+      }
+  }
+  @media(max-width: 768px) {
+      .cart-sidebar {
+          width: 320px;
+      }
+      
+      .cart-icon {
+          margin-left: 15px;
+      }
+      
+      .modal-content {
+          width: 90%;
+          margin: 10% auto;
+          padding: 20px;
+      }
+      
+      .products-grid {
+          grid-template-columns: 1fr 1fr;
+      }
+      
+      .advantages-grid {
+          grid-template-columns: 1fr;
+      }
+      
+      .category-filter {
+          overflow-x: auto;
+          padding-bottom: 10px;
+          flex-wrap: nowrap;
+      }
+  }
+  @media(max-width: 576px) {
+      .products-grid {
+          grid-template-columns: 1fr;
+      }
+      
+      .footer-content {
+          grid-template-columns: 1fr;
+      }
+  }
+</style>
+</head>
+<body>
+<!-- Шапка -->
+<header class="main-header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon"><i class="fas fa-spa"></i></span>
+                <span class="logo-text">ATOMY MOSCOW</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li class="active"><a href="about.html">О нас</a></li>
+                    <li><a href="products.html">Продукция</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <!-- Можно добавить корзину или меню -->
+                <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Хлебные крошки -->
+<section class="breadcrumbs">
+    <div class="container">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li>О компании</li>
+        </ul>
+    </div>
+</section>
+
+<!-- О компании -->
+<section class="about-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">О компании Atomy</h2>
+            <p class="section-subtitle">Корейское качество для вашей красоты</p>
+        </div>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="images/about.jpg" alt="О компании Atomy" />
+            </div>
+            <div class="about-text">
+                <h3>Наша философия</h3>
+                <p>Atomy - это международная компания из Южной Кореи, специализирующаяся на производстве высококачественной косметики, средств для ухода за кожей и БАДов. Наша философия - "Absolute Quality, Absolute Price" - абсолютное качество по абсолютно разумной цене.</p>
+                <h3>Наша история</h3>
+                <p>Основанная в 2009 году, компания Atomy быстро завоевала признание благодаря своим инновационным продуктам. Сегодня Atomy представлена в 20 странах мира, включая Россию, где мы работаем с 2015 года.</p>
+                <div class="about-features">
+                    <div class="about-feature"><i class="fas fa-check-circle"></i><span>Сертифицированная продукция</span></div>
+                    <div class="about-feature"><i class="fas fa-check-circle"></i><span>Натуральные ингредиенты</span></div>
+                    <div class="about-feature"><i class="fas fa-check-circle"></i><span>Безопасные формулы</span></div>
+                    <div class="about-feature"><i class="fas fa-check-circle"></i><span>Клинически протестировано</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- Миссия -->
+        <div class="mission-section">
+            <h3>Наша миссия</h3>
+            <p>Мы стремимся сделать качественную корейскую косметику доступной для каждого, сохраняя при этом высочайшие стандарты производства и используя только безопасные, натуральные ингредиенты.</p>
+            <!-- Можно добавить дополнительные карточки или описание -->
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <div class="mission-icon"><i class="fas fa-heart"></i></div>
+                    <h4>Забота о клиентах</h4>
+                    <p>Мы ценим каждого клиента и предлагаем индивидуальный подход</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon"><i class="fas fa-seedling"></i></div>
+                    <h4>Экологичность</h4>
+                    <p>Используем экологичные упаковки и безопасные формулы</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon"><i class="fas fa-flask"></i></div>
+                    <h4>Инновации</h4>
+                    <p>Постоянно развиваемся и внедряем новые технологии</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Подвал -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Atomy Moscow</h3>
+                <p>Корейская косметика премиум-класса с доставкой по всей России</p>
+            </div>
+            <div class="footer-col">
+                <h3>Меню</h3>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="products.html">Продукция</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Контакты</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +7 (777) 777-77-77</li>
+                    <li><i class="fas fa-envelope"></i> AtomyMoscow@bk.ru</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Соцсети</h3>
+                <div class="social-links">
+                    <a href="https://wa.me/77777777777" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link vk"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Atomy Moscow. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+<script>
+  // Местный скрипт для демонстрации, например, мобильное меню или интерактив
+  document.addEventListener('DOMContentLoaded', () => {
+    // Мобильное меню
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const mainNav = document.querySelector('.main-nav');
+    if (menuBtn && mainNav) {
+      menuBtn.addEventListener('click', () => {
+        mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
+      });
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Atomy Moscow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .logo i {
+            color: #3b7dd8;
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover,
+        li.active a {
+            color: #3b7dd8;
+        }
+        .cart-icon {
+            position: relative;
+            margin-left: 30px;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Хлебные крошки */
+        .breadcrumbs {
+            padding: 15px 0;
+            background: #f9f9f9;
+            margin-top: 80px;
+        }
+        .breadcrumbs ul {
+            display: flex;
+            list-style: none;
+        }
+        .breadcrumbs li {
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs li:not(:last-child):after {
+            content: '/';
+            margin-left: 10px;
+            color: #999;
+        }
+        .breadcrumbs a {
+            color: #3b7dd8;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Контакты */
+        .contacts-page {
+            padding: 40px 0 80px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #777;
+        }
+        .contacts-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .contact-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .contact-icon {
+            font-size: 2rem;
+            color: #3b7dd8;
+            margin-bottom: 20px;
+        }
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .contact-list li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .contact-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .contact-list a {
+            color: #3b7dd8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-list a:hover {
+            color: #2a6bc7;
+            text-decoration: underline;
+        }
+        .social-links.large {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-link i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        .whatsapp { background-color: #25D366; }
+        .vk { background-color: #4C75A3; }
+        .telegram { background-color: #0088cc; }
+        .instagram { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+        
+        /* Форма обратной связи */
+        .contact-form-wrapper {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .contact-form-wrapper h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .contact-form-wrapper p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #3b7dd8;
+            outline: none;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #3b7dd8;
+            color: #fff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #2a6bc7;
+            transform: translateY(-2px);
+        }
+        
+        /* Карта */
+        .map-section {
+            margin-top: 60px;
+            grid-column: 1 / -1;
+        }
+        .map-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .map-wrapper {
+            height: 400px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .map-placeholder {
+            text-align: center;
+            color: #666;
+        }
+        .map-placeholder i {
+            font-size: 3rem;
+            color: #3b7dd8;
+            margin-bottom: 15px;
+        }
+        
+        /* Корзина */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: #fff;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+            transition: right 0.3s;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        .cart-sidebar.active {
+            right: 0;
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .cart-item-info {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .cart-item-price {
+            color: #3b7dd8;
+            margin-bottom: 5px;
+        }
+        .cart-item-remove {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 2px;
+        }
+        .cart-total {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: right;
+        }
+        .total-price {
+            color: #3b7dd8;
+        }
+        
+        /* Подвал */
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 50px 20px;
+        }
+        footer h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        footer ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        footer ul li {
+            margin-bottom: 10px;
+        }
+        footer ul li i {
+            margin-right: 10px;
+            color: #3b7dd8;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .social-link {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #444;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        .social-link.whatsapp { background:#25D366; }
+        .social-link.vk { background:#4C75A3; }
+        .social-link.telegram { background:#0088cc; }
+        .social-link.instagram { background:linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        /* Адаптация */
+        @media(max-width: 992px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background: #fff;
+                flex-direction: column;
+                padding: 10px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                width: 200px;
+            }
+            nav ul.show {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .contacts-content {
+                grid-template-columns: 1fr;
+            }
+            .cart-sidebar {
+                width: 90%;
+                right: -100%;
+            }
+            .cart-sidebar.active {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="header-inner container">
+            <div class="logo"><i class="fas fa-spa"></i>ATOMY MOSCOW</div>
+            <nav>
+                <ul id="menu">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="products.html">Продукция</a></li>
+                    <li class="active"><a href="contacts.html">Контакты</a></li>
+                    <li>
+                        <div class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="mobile-menu" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Корзина -->
+    <div class="cart-overlay"></div>
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Ваша корзина</h3>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-total">Итого: <span class="total-price">0 ₽</span></div>
+        <button class="btn btn-primary checkout-btn">Оформить заказ</button>
+    </div>
+
+    <!-- Хлебные крошки -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li>Контакты</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contacts-page">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Наши контакты</h2>
+                <p class="section-subtitle">Свяжитесь с нами удобным для вас способом</p>
+            </div>
+            
+            <div class="contacts-content">
+                <div class="contacts-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Телефоны</h3>
+                        <ul class="contact-list">
+                            <li><strong>Менеджер по продажам:</strong> <a href="tel:+77777777777">+7 (777) 777-77-77</a></li>
+                            <li><strong>Консультант:</strong> <a href="tel:+77777777777">+7 (777) 777-77-77</a></li>
+                            <li><strong>Техническая поддержка:</strong> <a href="tel:+77777777777">+7 (777) 777-77-77</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Электронная почта</h3>
+                        <ul class="contact-list">
+                            <li><strong>Общие вопросы:</strong> <a href="mailto:AtomyMoscow@bk.ru">AtomyMoscow@bk.ru</a></li>
+                            <li><strong>Сотрудничество:</strong> <a href="mailto:partner@atomy-moscow.ru">partner@atomy-moscow.ru</a></li>
+                            <li><strong>Поддержка:</strong> <a href="mailto:support@atomy-moscow.ru">support@atomy-moscow.ru</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Социальные сети</h3>
+                        <div class="social-links large">
+                            <a href="https://wa.me/77777777777" class="social-link whatsap">
+                                <i class="fab fa-whatsapp"></i> 
+                            </a>
+                            <a href="#" class="social-link vk">
+                                <i class="fab fa-vk"></i> 
+                            </a>
+                            <a href="#" class="social-link telegram">
+                                <i class="fab fa-telegram"></i> 
+                            </a>
+                            <a href="#" class="social-link instagram">
+                                <i class="fab fa-instagram"></i> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <h3>Форма обратной связи</h3>
+                    <p>Заполните форму, и наш менеджер свяжется с вами в ближайшее время</p>
+                    
+                    <form class="contact-form" id="feedbackForm">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение *</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-section">
+                <h3>Мы находимся</h3>
+                <div class="map-wrapper">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Москва, ул. Косметическая, 123</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:30px;">
+            <div>
+                <h3>Atomy Moscow</h3>
+                <p>Корейская косметика премиум-класса с доставкой по всей России</p>
+            </div>
+            <div>
+                <h3>Меню</h3>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="products.html">Продукция</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div>
+    <h3>Контакты</h3>
+           <ul>
+              <li><i class="fas fa-phone"></i> +7 (777) 777-77-77</li>
+              <li><i class="fas fa-envelope"></i> AtomyMoscow@bk.ru</li>
+           </ul>
+            </div>
+            <div>
+                <h3>Соцсети</h3>
+                <div class="social-links">
+                    <a href="https://wa.me/77777777777" class="social-link whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link vk"><i class="fab fa-vk"></i></a>
+                    <a href="#" class="social-link telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="social-link instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Atomy Moscow. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('menu').classList.toggle('show');
+        });
+        
+        // Корзина
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartSidebar = document.querySelector('.cart-sidebar');
+            const closeCart = document.querySelector('.close-cart');
+            const overlay = document.querySelector('.cart-overlay');
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const cartCount = document.querySelector('.cart-count');
+            const totalPriceSpan = document.querySelector('.total-price');
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            function updateCart() {
+                localStorage.setItem('cart', JSON.stringify(cart));
+                cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'cart-item';
+                    div.innerHTML = `
+                        <div class="cart-item-img" style="background-image: url('${item.image}')"></div>
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">${item.price} ₽ × ${item.quantity} шт</div>
+                            <div class="cart-item-remove" data-index="${index}">Удалить</div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(div);
+                    
+                    const priceNum = parseFloat(item.price.replace(/\s|₽/g, ''));
+                    total += priceNum * item.quantity;
+                });
+                
+                totalPriceSpan.textContent = `${total.toLocaleString()} ₽`;
+                
+                // Добавляем обработчики для кнопок удаления
+                document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.dataset.index);
+                        cart.splice(index, 1);
+                        updateCart();
+                    });
+                });
+            }
+            
+            // Открытие/закрытие корзины
+            cartIcon.addEventListener('click', () => {
+                cartSidebar.classList.add('active');
+                overlay.classList.add('active');
+                updateCart();
+            });
+            
+            closeCart.addEventListener('click', () => {
+                cartSidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            overlay.addEventListener('click', () => {
+                cartSidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+            
+            // Оформление заказа
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Ваша корзина пуста!');
+                } else {
+                    alert('Заказ оформлен! Итог: ' + totalPriceSpan.textContent);
+                    cart = [];
+                    updateCart();
+                    cartSidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+            
+            // Инициализация корзины
+            updateCart();
+            
+            // Обработка формы обратной связи
+            document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
